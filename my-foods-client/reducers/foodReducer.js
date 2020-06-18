@@ -23,6 +23,10 @@ const foodReducer = (state = defaultState, action) => {
     switch(action.type){
         case FETCH_FOODS_SUCCESS:
             return {...state, foods: action.payload};
+        case FETCH_FOODS_LOADING:
+            return {...state, isLoading: action.payload}
+        case FETCH_FOODS_ERROR:
+            return {...state, error: action.payload}
         default:
             return state;
     }
