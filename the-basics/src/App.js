@@ -7,7 +7,8 @@ class App extends Component {
     people: [
       {name: "Mickey", animal: "Mouse"},
       {name: "Donald", animal: "Duck"},
-    ]
+    ],
+    showPeople: false
   }
 
   switchNameHandler = (newName) => {
@@ -29,6 +30,12 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPeople;
+    this.setState({showPeople: !doesShow});
+    //react will merge the update along with the other states
+  }
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -40,19 +47,28 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Basics of React</h1>
-        <p>We need to understand this jsx, and don't get confused with html</p>
+        <h1>Basics of React</h1> 
+        <p>We need to understand this jsx, it's like syntactical sugar</p>
         <button 
-          style = {style} //inline styling
-          onClick = {() => this.switchNameHandler()}>Switch name</button>
-        <Person 
-          name = {this.state.people[0].name} 
-          click = {this.switchNameHandler.bind(this, "Minnie")}
-          animal = {this.state.people[0].animal}/>
-        <Person 
-          name = {this.state.people[1].name} 
-          animal = {this.state.people[1].animal}
-          changed = {this.nameChangedHandler}/>
+          style = {style} //inline stylings
+          onClick = {this.togglePersonHandler}>Toggle People</button>
+
+        { //using the ternary operator to check to display or not
+          this.state.showPeople === true ?
+            <div>
+              <Person 
+                name = {this.state.people[0].name} 
+                click = {this.switchNameHandler.bind(this, "Minnie")}
+                animal = {this.state.people[0].animal}
+              />
+              <Person 
+                name = {this.state.people[1].name} 
+                animal = {this.state.people[1].animal}
+                changed = {this.nameChangedHandler}
+              />
+            </div> : null
+        }
+
       </div>
     );
   }
