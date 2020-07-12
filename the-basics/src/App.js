@@ -45,6 +45,32 @@ class App extends Component {
       cursor: "pointer"
     };
 
+    //using regular javascript here
+    //create a variable to either hold the jsx or to hold null
+
+    let people = null;
+    
+    //simple if else statment here
+    if(this.state.showPeople === true) {
+      people = (
+        <div>
+          {this.state.people.map(person =>{
+            return <Person name = {person.name} animal = {person.animal}/>
+          })}
+          {/* <Person 
+            name = {this.state.people[0].name} 
+            click = {this.switchNameHandler.bind(this, "Minnie")}
+            animal = {this.state.people[0].animal}
+          />
+          <Person 
+            name = {this.state.people[1].name} 
+            animal = {this.state.people[1].animal}
+            changed = {this.nameChangedHandler}
+          /> */}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Basics of React</h1> 
@@ -52,8 +78,9 @@ class App extends Component {
         <button 
           style = {style} //inline stylings
           onClick = {this.togglePersonHandler}>Toggle People</button>
-
-        { //using the ternary operator to check to display or not
+        {people}
+        
+        {/* { //using the ternary operator to check to display or not
           this.state.showPeople === true ?
             <div>
               <Person 
@@ -67,7 +94,7 @@ class App extends Component {
                 changed = {this.nameChangedHandler}
               />
             </div> : null
-        }
+        } */}
 
       </div>
     );
