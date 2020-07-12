@@ -4,9 +4,7 @@ import UserInput from './UserInput/UserInput.js';
 import UserOutput from './UserOutput/UserOutput.js';
 
 class App extends Component {
-  state = {
-    userOutput: {username: "k29", secondPara: "Here's another"}
-  }
+  state = {username: "k29"}
 
   usernameChangeHandler = (event) => {
     this.setState({username: event.target.value}); 
@@ -20,9 +18,12 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Assignment 1</h1>
-        <UserInput changed = {this.usernameChangeHandler} currentName = {this.state.username}/>
-        <UserOutput username = {this.state.username} secondPara = "Here's another"/>
-        <UserOutput username = "w56" secondPara = "Here's another"/>
+        <UserInput 
+          changed = {this.usernameChangeHandler} 
+          currentName = {this.state.username}
+        />
+        <UserOutput username = {this.state.username}/>
+        <UserOutput username = "w56"/>
       </div>
     );
   }

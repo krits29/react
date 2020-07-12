@@ -9,13 +9,12 @@ const userInput = (props) => {
     };
 
     return (
-        <div>
-            <input 
+        <input 
             type = "text" 
             style = {styling}
             onChange = {props.changed} 
-            value = {props.currentName}/>
-        </div>
+            value = {props.currentName}
+        />
     );
 };
 
