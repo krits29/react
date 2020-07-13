@@ -6,7 +6,7 @@ class App extends Component {
   state = {
     people: [
       {id: "111", name: "Mickey", animal: "Mouse"},
-      {id: "222", name: "Donald", animal: "Duck"},
+      {id: "222", name: "Donald", animal: "Duck"}
     ],
     showPeople: false
   }
@@ -21,13 +21,22 @@ class App extends Component {
     })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      people: [
-        {name: "Mickey", animal: "Mouse"},
-        {name: event.target.value, animal: "Duck"}
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.people.findIndex((prsn) => {
+      return prsn.id === id;
+    });
+    //findIndex takes in a function and will get the element in the array and then get the index
+    
+    //now actually accessing the person
+    const person = {...this.state.people[personIndex]};
+
+    person.name = event.target.value;
+
+    const people = [...this.state.people];
+    people[personIndex] = person;
+
+    this.setState({people: people});
+
   }
 
   deletePersonHandler = (personIndex) => {
@@ -62,12 +71,13 @@ class App extends Component {
     if(this.state.showPeople === true) {
       people = (
         <div>
-          {this.state.people.map((person, index) => {
+          {this.state.people.map((person, index) => { //using default map method to render a list into jsx elements
             return <Person 
               click = {() => this.deletePersonHandler(index)}
               name = {person.name} 
               animal = {person.animal}
-              key = {person.id}
+              key = {person.id} //more efficient way to compare 
+              changed = {(event) => this.nameChangedHandler(event, person.id)}
             />
           })}
           {/* <Person 
