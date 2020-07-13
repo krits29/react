@@ -5,8 +5,8 @@ import Person from './Person/Person.js';
 class App extends Component {
   state = {
     people: [
-      {name: "Mickey", animal: "Mouse"},
-      {name: "Donald", animal: "Duck"},
+      {id: "111", name: "Mickey", animal: "Mouse"},
+      {id: "222", name: "Donald", animal: "Duck"},
     ],
     showPeople: false
   }
@@ -32,7 +32,8 @@ class App extends Component {
 
   deletePersonHandler = (personIndex) => {
     //fetching the people
-    const people = this.state.people;
+    //const people = this.state.people.slice; //slice will make a copy of the original array
+    const people = [...this.state.people]; //es6 way of ^
     people.splice(personIndex, 1); //remove one element from the array
     this.setState({people: people});
   }
@@ -66,6 +67,7 @@ class App extends Component {
               click = {() => this.deletePersonHandler(index)}
               name = {person.name} 
               animal = {person.animal}
+              key = {person.id}
             />
           })}
           {/* <Person 
