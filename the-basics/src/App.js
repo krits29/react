@@ -2,6 +2,20 @@ import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
 import Radium, { StyleRoot } from 'radium';
+//import styled from 'styled-components';
+
+// const StyledButton = styled.button`
+//   background-color: rosybrown;
+//   font: inherit;
+//   border: 2px solid gray;
+//   padding: 8px;
+//   cursor: pointer;
+//   &":hover": {
+//     background-color: rgba(200, 150, 150, 0.50;
+//     color: white;
+//     border: none;
+//   }
+// `;
 
 class App extends Component {
   state = {
@@ -62,7 +76,7 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer",
       ":hover": {
-        backgroundColor: "rgba(200, 150, 150, 0.50",
+        backgroundColor: "rgba(200, 150, 150, 0.50)",
         color: "white",
         border: "none"
       }
@@ -101,7 +115,7 @@ class App extends Component {
       style.backgroundColor = "white";
       style[":hover"] = {
         backgroundColor: "whitesmoke",
-        color: "gray",
+        color: "darkgray",
         border: "2px solid lightgray"
       }
     }
@@ -115,13 +129,15 @@ class App extends Component {
     }
 
     return (
+      //if you want to use radium might have to do <StyleRoot>
       <StyleRoot>
         <div className="App">
           <h1 className = {extras.join(" ")}>Basics of React</h1> 
           <p>We need to understand this jsx, it's like syntactical sugar</p>
-          <button 
+          <button //can change it to <StyledButton>
             style = {style} //inline stylings
-            onClick = {this.togglePersonHandler}>Toggle People</button>
+            onClick = {this.togglePersonHandler}
+          >Toggle People</button>
           {people}
           
           {/* { //using the ternary operator to check to display or not
@@ -146,6 +162,7 @@ class App extends Component {
 }
 
 export default Radium(App);
+//export default App;
 
 
 
