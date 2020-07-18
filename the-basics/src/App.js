@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
   state = {
@@ -55,11 +56,16 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: "white",
+      backgroundColor: "rosybrown",
       font: "inherit",
       border: "2px solid gray",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: "rgba(200, 150, 150, 0.50",
+        color: "white",
+        border: "none"
+      }
     };
 
     //using regular javascript here
@@ -92,39 +98,54 @@ class App extends Component {
           /> */}
         </div>
       );
+      style.backgroundColor = "white";
+      style[":hover"] = {
+        backgroundColor: "whitesmoke",
+        color: "gray",
+        border: "2px solid lightgray"
+      }
+    }
+
+    const extras = [];
+    if(this.state.people.length <= 1){
+      extras.push("rosybrown");
+    }
+    if(this.state.people.length <= 2){
+      extras.push("bigger");
     }
 
     return (
-      <div className="App">
-        <h1>Basics of React</h1> 
-        <p>We need to understand this jsx, it's like syntactical sugar</p>
-        <button 
-          style = {style} //inline stylings
-          onClick = {this.togglePersonHandler}>Toggle People</button>
-        {people}
-        
-        {/* { //using the ternary operator to check to display or not
-          this.state.showPeople === true ?
-            <div>
-              <Person 
-                name = {this.state.people[0].name} 
-                click = {this.switchNameHandler.bind(this, "Minnie")}
-                animal = {this.state.people[0].animal}
-              />
-              <Person 
-                name = {this.state.people[1].name} 
-                animal = {this.state.people[1].animal}
-                changed = {this.nameChangedHandler}
-              />
-            </div> : null
-        } */}
-
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1 className = {extras.join(" ")}>Basics of React</h1> 
+          <p>We need to understand this jsx, it's like syntactical sugar</p>
+          <button 
+            style = {style} //inline stylings
+            onClick = {this.togglePersonHandler}>Toggle People</button>
+          {people}
+          
+          {/* { //using the ternary operator to check to display or not
+            this.state.showPeople === true ?
+              <div>
+                <Person 
+                  name = {this.state.people[0].name} 
+                  click = {this.switchNameHandler.bind(this, "Minnie")}
+                  animal = {this.state.people[0].animal}
+                />
+                <Person 
+                  name = {this.state.people[1].name} 
+                  animal = {this.state.people[1].animal}
+                  changed = {this.nameChangedHandler}
+                />
+              </div> : null
+          } */}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App; 
+export default Radium(App);
 
 
 

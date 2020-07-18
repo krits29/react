@@ -1,9 +1,16 @@
 import React from 'react';
 import './Person.css';
+import Radium from 'radium';
 
 const person = (props) => {
+    const style = {
+        "@media (max-width: 620px)": {
+            width: "450px"
+        }
+    };
+    
     return (
-        <div className = "Person">
+        <div className = "Person" style = {style}>
             <p>Adding in custom js code with curly braces</p>
             <p>Using random number: {Math.floor(Math.random() * 50)}</p>
             <p onClick = {props.click}>Given name: {props.name}</p>
@@ -14,4 +21,4 @@ const person = (props) => {
     );
 };
 
-export default person;
+export default Radium(person);
