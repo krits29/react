@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const person = (props) => {
     const style = {
-        "@media (max-width: 620px)": {
+        "@media (maxWidth: 620px)": {
             width: "450px"
         }
     };
