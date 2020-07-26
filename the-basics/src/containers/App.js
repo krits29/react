@@ -41,9 +41,9 @@ class App extends Component {
     console.log("[App.js] componentDidMount");
   }
 
-  componentWillMount() {
-    console.log("[App.js] componentWillMount");
-  }
+  // componentWillMount() {
+  //   console.log("[App.js] componentWillMount");
+  // }
 
   static getDerivedStateFromProps(props, state) {
     console.log("[app.js] getDerivedStateFrompProps", props);
