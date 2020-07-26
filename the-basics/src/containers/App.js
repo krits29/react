@@ -1,7 +1,9 @@
 import React, { Component, useState } from 'react';
 import './App.css';
-import Person from './Person/Person.js';
+import People from "../components/People/People/People";
 import Radium, { StyleRoot } from 'radium';
+import Cockpit from "../components/People/Cockpit/Cockpit";
+
 //import styled from 'styled-components';
 
 // const StyledButton = styled.button`
@@ -18,6 +20,11 @@ import Radium, { StyleRoot } from 'radium';
 // `;
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[app.js] constructor");
+  }
+
   state = {
     people: [
       {id: "111", name: "Mickey", animal: "Mouse"},
@@ -26,8 +33,24 @@ class App extends Component {
     showPeople: false
   }
 
+  componentDidCatch() {
+    console.log("[App.js] componentDidCatch");
+  }
+
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+
+  componentWillMount() {
+    console.log("[App.js] componentWillMount");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[app.js] getDerivedStateFrompProps", props);
+    return state;
+  }
+
   switchNameHandler = (newName) => {
-    //console.log("Clicked!");
     this.setState({
       people: [
         {name: newName, animal: "Mouse"},
@@ -69,29 +92,36 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: "rosybrown",
-      font: "inherit",
-      border: "2px solid gray",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "rgba(200, 150, 150, 0.50)",
-        color: "white",
-        border: "none"
-      }
-    };
+    // const style = {
+    //   backgroundColor: "rosybrown",
+    //   font: "inherit",
+    //   border: "2px solid gray",
+    //   padding: "8px",
+    //   cursor: "pointer",
+    //   ":hover": {
+    //     backgroundColor: "rgba(200, 150, 150, 0.50)",
+    //     color: "white",
+    //     border: "none"
+    //   }
+    // };
 
     //using regular javascript here
     //create a variable to either hold the jsx or to hold null
+
+    console.log("[app.js] render");
 
     let people = null;
     
     //simple if else statment here
     if(this.state.showPeople === true) {
-      people = (
-        <div>
-          {this.state.people.map((person, index) => { //using default map method to render a list into jsx elements
+      people = 
+        <People 
+          people = {this.state.people}
+          clicked = {this.deletePersonHandler}
+          changed = {this.nameChangedHandler}
+        />
+        
+          {/* {this.state.people.map((person, index) => { //using default map method to render a list into jsx elements
             return <Person 
               click = {() => this.deletePersonHandler(index)}
               name = {person.name} 
@@ -99,7 +129,7 @@ class App extends Component {
               key = {person.id} //more efficient way to compare 
               changed = {(event) => this.nameChangedHandler(event, person.id)}
             />
-          })}
+          })} */}
           {/* <Person 
             name = {this.state.people[0].name} 
             click = {this.switchNameHandler.bind(this, "Minnie")}
@@ -110,34 +140,40 @@ class App extends Component {
             animal = {this.state.people[1].animal}
             changed = {this.nameChangedHandler}
           /> */}
-        </div>
-      );
-      style.backgroundColor = "white";
-      style[":hover"] = {
-        backgroundColor: "whitesmoke",
-        color: "darkgray",
-        border: "2px solid lightgray"
-      }
+        
+      ;
+      // style.backgroundColor = "white";
+      // style[":hover"] = {
+      //   backgroundColor: "whitesmoke",
+      //   color: "darkgray",
+      //   border: "2px solid lightgray"
+      // }
     }
 
-    const extras = [];
-    if(this.state.people.length <= 1){
-      extras.push("rosybrown");
-    }
-    if(this.state.people.length <= 2){
-      extras.push("bigger");
-    }
+    // const extras = [];
+    // if(this.state.people.length <= 1){
+    //   extras.push("rosybrown");
+    // }
+    // if(this.state.people.length <= 2){
+    //   extras.push("bigger");
+    // }
 
     return (
       //if you want to use radium might have to do <StyleRoot>
       <StyleRoot>
         <div className="App">
-          <h1 className = {extras.join(" ")}>Basics of React</h1> 
+          <Cockpit 
+            showPeople = {this.state.showPeople} 
+            people = {this.state.people}
+            clicked = {this.togglePersonHandler}
+          />
+
+          {/* <h1 className = {extras.join(" ")}>Basics of React</h1> 
           <p>We need to understand this jsx, it's like syntactical sugar</p>
           <button //can change it to <StyledButton>
             style = {style} //inline stylings
             onClick = {this.togglePersonHandler}
-          >Toggle People</button>
+          >Toggle People</button> */}
           {people}
           
           {/* { //using the ternary operator to check to display or not

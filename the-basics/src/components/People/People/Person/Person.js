@@ -1,26 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Person.css';
 import Radium from 'radium';
 import styled from "styled-components";
 
-const person = (props) => {
-    const style = {
-        "@media (maxWidth: 620px)": {
-            width: "450px"
-        }
-    };
-    
-    return (
-        <div className = "Person" style = {style}>
-            <p onClick = {props.click}>Given name: {props.name}</p>
-            <p>Given animal: {props.animal}</p>
-            <p>{props.children}</p>
-            <input type = "text" onChange = {props.changed} value = {props.name}/>
-        </div>
-
+//changed to class based components...
+//const person = (props) => 
+//need to replace props now with this.props
+class Person extends Component {
+    render() {
+        const style = {
+            "@media (maxWidth: 620px)": {
+                width: "450px"
+            }
+        };
         
+        console.log("[person.js] rendering...");
 
-    );
+        return (
+            <div className = "Person" style = {style}>
+                <p onClick = {this.props.click}>Given name: {this.props.name}</p>
+                <p>Given animal: {this.props.animal}</p>
+                <p>{this.props.children}</p>
+                <input type = "text" onChange = {this.props.changed} value = {this.props.name}/>
+            </div>
+
+        );
+    }
 };
 
 //using styled components
@@ -35,4 +40,5 @@ const person = (props) => {
 // `
 
 //export default Radium(person);
-export default person;
+//class with uppercase to Person instead of person
+export default Person;
