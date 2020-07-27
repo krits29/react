@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import classes from "./Cockpit.css";
 import Radium, { StyleRoot } from 'radium';
 
+//functional component example
 const cockpit = (props) => {
+    useEffect(() => {
+        console.log("[Cockpit.js] useEffect");
+        //http request...
+        setTimeout(() => {
+            alert("heres the alert");
+        }, 1000);
+    }, []); //passing an empty array mean there are no dependencies
+    //or pass an array like this [props.people] to have that dependency
+
     const extras = [];
     const style = {
         backgroundColor: "rosybrown",

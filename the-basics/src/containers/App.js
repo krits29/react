@@ -45,6 +45,17 @@ class App extends Component {
   //   console.log("[App.js] componentWillMount");
   // }
 
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    //false will prevent the update
+    //must return to tell react what to do with the update
+    return true;
+  }
+
   static getDerivedStateFromProps(props, state) {
     console.log("[app.js] getDerivedStateFrompProps", props);
     return state;
